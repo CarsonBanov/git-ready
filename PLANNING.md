@@ -5,3 +5,6 @@
 * [x] local storage, cookies, etc. for preserving state of comment (expanded/collapsed)
 * [ ] probably want to do button on comments on the code not just "issuecomment"
 * [x] re-loop after someone submits a comment to add new button (need to check if button exists)
+* [ ] publish so we don't have to install using dev mode
+* [ ] expand all or collapse all button
+* [ ] load script on all pages but only execute on github pull request pages rather than specifying PR regex in manifest (some links to PRs on github don't cause a page reload so the script isn't injected)

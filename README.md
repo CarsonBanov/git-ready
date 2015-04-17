@@ -1,8 +1,12 @@
 # Github Mark Read Complete Comments
 
+## What?
+
 This extension will insert a button into jquery pull request pages that will
 allow you to collapse comments to improve the timeline of a PR. The
 collapsed/expanded state will be preserved on page navigation.
+
+## Why?
 
 Why you should use:
   * many or large comments cluttering your PR view even tho you have read and dealt with the content of those comments
@@ -15,3 +19,10 @@ Why you should not use:
   * hiding useful comments may cause you to miss things
   * if someone edits a comment I'm not sure what happens (probably will stay hidden)
   * there are more typos than tests in this repo
+
+## How?
+
+* clone this repo
+* follow [these instructions](https://developer.chrome.com/extensions/getstarted#unpacked) to load the extension into Chrome
+* navigate to a github pull request (that has comments!) where the extension will be active
+* you will see a button just to the left of the edit comment button that gives the ability to expand or collapse a comment
