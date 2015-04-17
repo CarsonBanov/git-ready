@@ -2,8 +2,8 @@
 
 ## What?
 
-This extension will insert a button into jquery pull request pages that will
-allow you to collapse comments to improve the timeline of a PR. The
+This extension will insert a button into github pull request pages that will
+allow you to collapse comments to improve the readability of a PR timeline. The
 collapsed/expanded state will be preserved on page navigation.
 
 ## Why?
