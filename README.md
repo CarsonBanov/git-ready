@@ -6,6 +6,8 @@ This extension will insert a button into github pull request pages that will
 allow you to collapse comments to improve the readability of a PR timeline. The
 collapsed/expanded state will be preserved on page navigation.
 
+![Demo](gmrcc-demo.gif)
+
 ## Why?
 
 Why you should use:
