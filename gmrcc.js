@@ -1,6 +1,6 @@
 'use strict';
 
-var COLLAPSER_HTML = "<div class='gmrcc-toggle', style='cursor:n-resize; width: 100px; background-color: #F6F1FE; border-radius: 4px 4px 0 0; padding-left: 5px; border: 1px solid #DFBFFC;'>&nbsp;</div>";
+var COLLAPSER_HTML = "<div class='gmrcc-toggle', style='cursor:n-resize; height: 1.5em; background-color: #F6F1FE; border-radius: 4px 4px 0 0; padding: 0 5px; border: 1px solid #DFBFFC; overflow: hidden;'></div>";
 
 function addButtons(selector, id_sel){
   $(selector).each(function(){
@@ -15,6 +15,7 @@ function addButtons(selector, id_sel){
     } else{
       id = $this.attr("id");
     }
+    var text = $this.text().replace(/\s\s+/g, ' ').slice(0, 250);
 
     // Only add button if we have a reliable (not null/undefined) id to record.
     // If we do, prefix it for safekeeping.
@@ -22,11 +23,8 @@ function addButtons(selector, id_sel){
       return;
     } else{
       id = "gmrcc-" + id;
-    }
-
-    // Set id.
-    if(id){
-      $toggle.attr("id", id)
+      $toggle.attr("id", id);
+      $toggle.attr("data-gmrcc-text", text);
     }
 
     // Add button to comment if it isn't already there.
@@ -47,12 +45,14 @@ function handleButton(toggle){
   function expand(){
     $toggle.css("cursor", "n-resize");
     $toggle.css("box-shadow", "none");
+    $toggle.text("");
     $toggle.siblings().show();
     localStorage.setItem(id, 0);
   }
   function collapse(){
     $toggle.css("cursor", "s-resize");
     $toggle.css("box-shadow", "inset 1px 1px 2px 2px #27496D");
+    $toggle.text($toggle.attr("data-gmrcc-text"));
     $toggle.siblings().hide();
     localStorage.setItem(id, 1);
   }
