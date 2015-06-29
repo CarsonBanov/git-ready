@@ -1,15 +1,35 @@
 'use strict';
 
-// Loop through all comments and add expand/collapse button.
-//
-function addButtons(){
-  $("div[id^=issuecomment-] .timeline-comment-header").each(function(){
+var COLLAPSER_HTML = "<div class='gmrcc-toggle', style='cursor:n-resize; height: 1.5em; background-color: #F6F1FE; border-radius: 4px 4px 0 0; padding: 0 5px; border: 1px solid #DFBFFC; overflow: hidden;'></div>";
+
+function addButtons(selector, id_sel){
+  $(selector).each(function(){
+    // Reset this.
+    var $this = $(this);
     // Button for expanding/collapsing.
-    var $toggle = $("<span class='gmrcc-toggle timeline-comment-label', style='cursor:n-resize'>Collapse</span>");
+    var $toggle = $(COLLAPSER_HTML);
+    // Id for saving.
+    var id;
+    if(id_sel){
+      id = $this.find(id_sel).attr("id");
+    } else{
+      id = $this.attr("id");
+    }
+    var text = $this.text().replace(/\s\s+/g, ' ').slice(0, 250);
+
+    // Only add button if we have a reliable (not null/undefined) id to record.
+    // If we do, prefix it for safekeeping.
+    if(!id){
+      return;
+    } else{
+      id = "gmrcc-" + id;
+      $toggle.attr("id", id);
+      $toggle.attr("data-gmrcc-text", text);
+    }
 
     // Add button to comment if it isn't already there.
-    if(!$(this).find(".gmrcc-toggle").length > 0){
-      $(this).find(".timeline-comment-actions").after($toggle);
+    if(!$this.find(".gmrcc-toggle").length > 0){
+      $this.prepend($toggle);
     }
   });
 }
@@ -19,35 +39,28 @@ function addButtons(){
 function handleButton(toggle){
   // Set up variables.
   var $toggle = $(toggle);
-  var $parent = $toggle.parents("div[id^=issuecomment-]");
-  var $comment = $parent.find(".comment-content");
-  var $header = $parent.find(".timeline-comment-header");
-  var isCollapsed = "gmrcc-"+$parent.attr("id");
-  var colorPrev = $header.css("background-color");
-  var borderPrev = $parent.css("border");
+  var id = $toggle.attr("id");
 
   // Expand and collapse functions to be used by logic.
   function expand(){
-    $toggle.text("Collapse");
     $toggle.css("cursor", "n-resize");
-    $parent.css("border", borderPrev);
-    $header.css("background-color", colorPrev);
-    $comment.show();
-    localStorage.setItem(isCollapsed, 0);
+    $toggle.css("box-shadow", "none");
+    $toggle.text("");
+    $toggle.siblings().show();
+    localStorage.setItem(id, 0);
   }
   function collapse(){
-    $toggle.text("Expand");
     $toggle.css("cursor", "s-resize");
-    $parent.css("border", "none");
-    $header.css("background-color", "white");
-    $comment.hide();
-    localStorage.setItem(isCollapsed, 1);
+    $toggle.css("box-shadow", "inset 1px 1px 2px 2px #27496D");
+    $toggle.text($toggle.attr("data-gmrcc-text"));
+    $toggle.siblings().hide();
+    localStorage.setItem(id, 1);
   }
 
   // Initial setup (backwards logic from click handler).
   // If it was collapsed during previous page visit we want to collapse it
   // again. This will cause a small flicker.
-  if(localStorage.getItem(isCollapsed)==true){
+  if(localStorage.getItem(id)==true){
     collapse();
   }
 
@@ -57,11 +70,11 @@ function handleButton(toggle){
     $toggle.addClass("gmrcc-listened");
 
     // Listen to click on the expand/collapse button.
-    $toggle.click(function() {
-      if(localStorage.getItem(isCollapsed)==true){
+    $toggle.click(function(){
+      if(localStorage.getItem(id)==true){
         expand();
       }
-      else {
+      else{
         collapse();
       }
     });
@@ -99,7 +112,8 @@ function handleNewComment(){
 // Add buttons and click handlers if there are any not already set up.
 //
 function refreshButtons(){
-  addButtons();
+  addButtons(".timeline-comment-wrapper", "div[id^=issuecomment-]");
+  addButtons("div[id^=diff-for-comment-]");
   handleButtons();
 }
 
