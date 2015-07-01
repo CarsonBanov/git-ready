@@ -2,12 +2,11 @@
 
 var COLLAPSER_HTML = "<div class='gmrcc-toggle', style='cursor:n-resize; height: 1.5em; background-color: #F6F1FE; border-radius: 4px 4px 0 0; padding: 0 5px; border: 1px solid #DFBFFC; overflow: hidden;'></div>";
 
-function addButtons(selector, id_sel){
+function addButtons(selector, id_sel, comment_sel_arr){
   $(selector).each(function(){
-    // Reset this.
+    // Set this.
     var $this = $(this);
-    // Button for expanding/collapsing.
-    var $toggle = $(COLLAPSER_HTML);
+
     // Id for saving.
     var id;
     if(id_sel){
@@ -15,20 +14,26 @@ function addButtons(selector, id_sel){
     } else{
       id = $this.attr("id");
     }
-    var text = $this.text().replace(/\s\s+/g, ' ').slice(0, 250);
-
     // Only add button if we have a reliable (not null/undefined) id to record.
     // If we do, prefix it for safekeeping.
     if(!id){
       return;
     } else{
       id = "gmrcc-" + id;
-      $toggle.attr("id", id);
-      $toggle.attr("data-gmrcc-text", text);
+    }
+
+    // Text to show when collapsed.
+    var text = [];
+    if (comment_sel_arr && comment_sel_arr.length) {
+      for (var i = 0; i < comment_sel_arr.length; i++) {
+        text.push($this.find(comment_sel_arr[i]).text().replace(/\s\s+/g, ' ').slice(0, 250));
+      };
     }
 
     // Add button to comment if it isn't already there.
     if(!$this.find(".gmrcc-toggle").length > 0){
+      // Button for expanding/collapsing.
+      var $toggle = $(COLLAPSER_HTML).attr("id", id).attr("data-gmrcc-text", text);
       $this.prepend($toggle);
     }
   });
@@ -112,8 +117,8 @@ function handleNewComment(){
 // Add buttons and click handlers if there are any not already set up.
 //
 function refreshButtons(){
-  addButtons(".timeline-comment-wrapper", "div[id^=issuecomment-]");
-  addButtons("div[id^=diff-for-comment-]");
+  addButtons(".timeline-comment-wrapper", "div[id^=issuecomment-]", [".timeline-comment-header", ".comment-body"]);
+  addButtons("div[id^=diff-for-comment-]", null, [".discussion-item-header", ".comment-body"]);
   handleButtons();
 }
 
