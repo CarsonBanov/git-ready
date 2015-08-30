@@ -120,7 +120,6 @@ function refreshButtons(){
   addButtons(".timeline-comment-wrapper", "div[id^=issuecomment-]", [".timeline-comment-header", ".comment-body"]);
   addButtons("div[id^=diff-for-comment-]", null, [".discussion-item-header", ".comment-body"]);
   addButtons("div[id^=diff-]", null, [".file-info .user-select-contain"]);
-  console.log("CALLED");
   handleButtons();
 }
 
