@@ -119,6 +119,7 @@ function handleNewComment(){
 function refreshButtons(){
   addButtons(".timeline-comment-wrapper", "div[id^=issuecomment-]", [".timeline-comment-header", ".comment-body"]);
   addButtons("div[id^=diff-for-comment-]", null, [".discussion-item-header", ".comment-body"]);
+  console.log("CALLED");
   handleButtons();
 }
 
