@@ -19,7 +19,7 @@ function addButtons(selector, id_sel, comment_sel_arr){
     if(!id){
       return;
     } else{
-      id = "gmrcc-" + id;
+      id = "gmrcc_" + window.location + "_" + id;
     }
 
     // Text to show when collapsed.
@@ -119,6 +119,7 @@ function handleNewComment(){
 function refreshButtons(){
   addButtons(".timeline-comment-wrapper", "div[id^=issuecomment-]", [".timeline-comment-header", ".comment-body"]);
   addButtons("div[id^=diff-for-comment-]", null, [".discussion-item-header", ".comment-body"]);
+  addButtons("div[id^=diff-]", null, [".file-info .user-select-contain"]);
   handleButtons();
 }
 
