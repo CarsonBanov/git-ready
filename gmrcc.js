@@ -8,18 +8,18 @@ function addButtons(selector, id_sel, comment_sel_arr){
     var $this = $(this);
 
     // Id for saving.
-    var id = "gmrcc_" + window.location + "_";
+    var id;
     if(id_sel){
-      id += $this.find(id_sel).attr("id");
+      id = $this.find(id_sel).attr("id");
     } else{
-      id += $this.attr("id");
+      id = $this.attr("id");
     }
     // Only add button if we have a reliable (not null/undefined) id to record.
     // If we do, prefix it for safekeeping.
     if(!id){
       return;
     } else{
-      id = "gmrcc-" + id;
+      id = "gmrcc_" + window.location + "_" + id;
     }
 
     // Text to show when collapsed.
