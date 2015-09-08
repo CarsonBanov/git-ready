@@ -1,33 +1,15 @@
-// {
-//   "manifest_version": 2,
-//   "name": "Github Mark Read Complete Comments",
-//   "version": "1.0.0",
-//   "description": "Allows users to mark and collapse github PR comments when they are read or completed",
-//   "browser_action": {
-//     "default_icon": {
-//       "19": "img/gmrcc-icon.png",
-//       "38": "img/gmrcc-icon-2x.png"
-//     },
-//     "default_title": "Github Mark Read Complete Comments"
-//   },
-//   "content_scripts": [
-//     {
-//       "matches": ["*://github.com/*/pull/*"],
-//       "js": ["gmrcc.js"],
-//       "run_at": "document_end",
-//       "all_frame": false
-//     }
-//   ]
-// }
-
-
 {
   "manifest_version": 2,
   "name": "Github Mark Read Complete Comments",
   "version": "1.0.0",
-  "description": "Allows users to mark and collapse github PR comments when they are read or completed",
+  "description": "Allows users to mark and collapse github PR comments when they are read or completed.",
   "browser_action": {
     "default_title": "Github Mark Read Complete Comments"
+  },
+  "icons": {
+    "16": "images/gmrcc-icon-16.png",
+    "48": "images/gmrcc-icon-48.png",
+    "128": "images/gmrcc-icon-128.png"
   },
   "content_scripts": [
     {
