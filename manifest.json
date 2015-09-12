@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Git Ready",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Allows users to mark and collapse github PR comments when they are read or completed.",
   "browser_action": {
     "default_title": "Git Ready"
