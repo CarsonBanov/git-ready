@@ -1,6 +1,6 @@
 'use strict';
 
-var COLLAPSER_HTML = "<div class='gmrcc-toggle', style='cursor:n-resize; height: 1.5em; background-color: #F6F1FE; border-radius: 4px 4px 0 0; padding: 0 5px; border: 1px solid #DFBFFC; overflow: hidden;'></div>";
+var COLLAPSER_HTML = "<div class='g_r-toggle', style='cursor:n-resize; height: 1.5em; background-color: #F6F1FE; border-radius: 4px 4px 0 0; padding: 0 5px; border: 1px solid #DFBFFC; overflow: hidden;'></div>";
 
 function addButtons(selector, id_sel, comment_sel_arr){
   $(selector).each(function(){
@@ -19,7 +19,7 @@ function addButtons(selector, id_sel, comment_sel_arr){
     if(!id){
       return;
     } else{
-      id = "gmrcc_" + window.location + "_" + id;
+      id = "g_r_" + window.location + "_" + id;
     }
 
     // Text to show when collapsed.
@@ -31,9 +31,9 @@ function addButtons(selector, id_sel, comment_sel_arr){
     }
 
     // Add button to comment if it isn't already there.
-    if(!$this.find(".gmrcc-toggle").length > 0){
+    if(!$this.find(".g_r-toggle").length > 0){
       // Button for expanding/collapsing.
-      var $toggle = $(COLLAPSER_HTML).attr("id", id).attr("data-gmrcc-text", text);
+      var $toggle = $(COLLAPSER_HTML).attr("id", id).attr("data-g_r-text", text);
       $this.prepend($toggle);
     }
   });
@@ -57,7 +57,7 @@ function handleButton(toggle){
   function collapse(){
     $toggle.css("cursor", "s-resize");
     $toggle.css("box-shadow", "inset 1px 1px 2px 2px #27496D");
-    $toggle.text($toggle.attr("data-gmrcc-text"));
+    $toggle.text($toggle.attr("data-g_r-text"));
     $toggle.siblings().hide();
     localStorage.setItem(id, 1);
   }
@@ -70,9 +70,9 @@ function handleButton(toggle){
   }
 
   // Click handler for expand/collapse button.
-  if(!$toggle.hasClass("gmrcc-listened")){
+  if(!$toggle.hasClass("g_r-listened")){
     // Add a class so we know the listener it has been set up.
-    $toggle.addClass("gmrcc-listened");
+    $toggle.addClass("g_r-listened");
 
     // Listen to click on the expand/collapse button.
     $toggle.click(function(){
@@ -89,7 +89,7 @@ function handleButton(toggle){
 // Loop through and set up click handlers for all expand/collapse buttons.
 //
 function handleButtons(){
-  $(".gmrcc-toggle").each(function(){
+  $(".g_r-toggle").each(function(){
     handleButton(this);
   });
 }
