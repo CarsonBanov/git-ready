@@ -114,6 +114,15 @@ function handleNewComment(){
   });
 }
 
+// Set up click handlers to handle clicking from the comments view to the files
+// view tab.
+//
+function handleSwitchTabs(){
+  $(document).click(".tabnav-tabs", function(){
+    setTimeout(refreshButtons,1000);
+  });
+}
+
 // Add buttons and click handlers if there are any not already set up.
 //
 function refreshButtons(){
@@ -128,4 +137,5 @@ function refreshButtons(){
 !function(){
   refreshButtons();
   handleNewComment();
+  handleSwitchTabs();
 }();
